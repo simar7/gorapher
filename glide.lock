@@ -1,0 +1,10 @@
+hash: 999ed86eb9ae8b7fc138018f81d4efc07528ba9983b239c240df594507239ed6
+updated: 2017-02-08T20:37:27.633842661-08:00
+imports:
+- name: github.com/gorilla/context
+  version: 08b5f424b9271eedf6f9f0ce86cb9396ed337a42
+- name: github.com/gorilla/mux
+  version: 392c28fe23e1c45ddba891b0320b3b5df220beea
+- name: github.com/strava/go.strava
+  version: f5c7cee1038b80d25e3d262208d295c10ca2ac4b
+testImports: []

@@ -3,30 +3,10 @@ package main
 import (
 	"flag"
 	"log"
-
-	"github.com/strava/go.strava"
+	"net/http"
 )
 
-// ListPastRuns lists the latest runs
-func ListPastRuns(client *strava.Client, athleteID int64) {
-	log.Println("Fetching latest runs...")
-	activity, err := strava.NewAthletesService(client).ListActivities(athleteID).Do()
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	for key, value := range activity {
-		if activity[key].Type.String() == "Run" {
-			log.Printf("Run: %d | HR: %f | Distance: %2f", key, value.AverageHeartrate, value.Distance/1000)
-		}
-	}
-}
-
-func main() {
-
-	var authToken string
-	var athleteID int64
-
+func init() {
 	flag.StringVar(&authToken, "authtoken", "", "Authorization Token")
 	flag.Int64Var(&athleteID, "athid", 0, "Athlete ID")
 
@@ -42,7 +22,9 @@ func main() {
 		log.Fatalln("Please provide an athlete ID.")
 	}
 
-	client := strava.NewClient(authToken)
+}
 
-	ListPastRuns(client, athleteID)
+func main() {
+	router := Router()
+	log.Fatal(http.ListenAndServe(":8080", router))
 }
